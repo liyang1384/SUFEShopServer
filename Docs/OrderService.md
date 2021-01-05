@@ -7,11 +7,11 @@
     'order_type': 0 //0表示买进订单，1表示卖出订单  
     'commodity_name': '',  
     'min_amount': 0,  
-    'max_amount': '',  
+    'max_amount': '',
     'order_state': '',  
     'sort': {  
         'name' : 'order_time',  
-        'mode' : 'desc'  
+        'mode' : 'desc' 
     },  
     'page':'1'  
 }  
@@ -103,3 +103,41 @@
     speed表示用户对“发货速度”的评价，为数字0-5；
     attitude表示用户对“卖家态度”的评价，为数字0-5；
     filelist为用户上传的一组图片，作为评价的凭证；
+
+
+4.生成订单
+前端=>后端（没有特殊说明即为默认值）  
+{  
+        'commodity_id': '',
+        'user_id': '',
+        'amount': ''
+}
+
+后端=>前端（仅表示数据格式，具体的值应由查询结果填充）  
+[  
+    {   
+        'order_id': '',
+        'commodity_name': '',
+        'commodity_type': '', 
+        'user_name': '', //卖家的用户名
+        'order_time': ''
+    }  
+]  
+
+5.支付订单(创建payment record)
+前端=>后端（没有特殊说明即为默认值）  
+{  
+        'order_id': '',
+        'user_id': '',
+        'payment_platform': '',
+        'payment_type': '买家付款给平台',
+        'order_status': '已付款'
+}
+
+后端=>前端（仅表示数据格式，具体的值应由查询结果填充）  
+[  
+    {   
+        'payment_time': '',
+        'payment_id': ''
+    }  
+]  
