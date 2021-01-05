@@ -33,5 +33,82 @@
 ]  
 当application_state为未审核时，auditor和auditor_time字段值应为''  
 
+2.主页查找商品
+前端=>后端  
+{  
+    'commodity_name': ''  
+    'min_price': 0,  
+    'max_price': '',  
+    'commodity_type':''
+}  
+说明：commodity_name表示商品名称,min_price和max_price分别表示查询的价格下限和上限（为空字符串时表示没有上限），commodity_type表示商品类别。如果'commodity_type'为空，则全部商品类型都要查。
+
+后端=>前端（仅表示数据格式，具体的值应由查询结果填充）  
+[  
+    {    
+        'commodity_name': '',  
+        'price': '',
+        'commodity_picture': '',
+        'commodity_type':''
+    }
+]  
+
+3.查找我的商品
+前端=>后端  
+{  
+    'commodity_name': ''  
+}  
+说明：如果'commodity_name'为空，则全部商品都要查。
+
+后端=>前端（仅表示数据格式，具体的值应由查询结果填充）  
+[  
+    {    
+        'commodity_id': '',
+        'commodity_name': '',  
+        'price': '',
+        'commodity_picture': '',
+        'commodity_type':''，
+        'application_state':''
+    }
+]  
+
+4.查看我的浏览记录
+
+前端=>后端  
+{  
+    'commodity_name': ''  
+}  
+说明：如果'commodity_name'为空，则全部商品都要查。
+
+后端=>前端（仅表示数据格式，具体的值应由查询结果填充）  
+[  
+    {    
+        'commodity_id': '',
+        'commodity_name': '',  
+        'price': '',
+        'commodity_picture': '',
+        'commodity_type':''，
+        'application_state':''
+        'browse_time':''
+    }
+]  
+
+5.发布商品
+
+前端=>后端  
+{  
+    'commodity_picture': '',
+    'commodity_name': '',  
+    'price': '',
+    'commodity_type':''，
+    'detail':''
+}  
+
+后端=>前端（仅表示数据格式，具体的值应由查询结果填充）  
+[
+    {    
+    }
+]  
+说明：这个不知道返回啥，先放着
 
 
