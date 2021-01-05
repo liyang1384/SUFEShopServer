@@ -6,6 +6,18 @@
         'user_id': ''
 }
 
+后端=>前端（仅表示数据格式，具体的值应由查询结果填充）  
+[  
+    {   
+        'commodity_name': '',  
+        'commodity_picture': '',
+        'commodity_type': '', 
+        'collect_time': ''  
+        'user_name': '', //卖家的用户名  
+        'commodity_state': '',
+        'price':''
+    }  
+]  
 
 2.获取个人收藏夹信息
 前端=>后端（没有特殊说明即为默认值）  
@@ -46,3 +58,15 @@
         'commodity_id': '',
         'user_id': ''
 }
+
+后端=>前端（仅表示数据格式，具体的值应由查询结果填充）  
+[  
+    {   
+        'commodity_name': '',  
+        'commodity_picture': '',
+        'commodity_type': '', 
+        'user_name': '', //卖家的用户名  
+        'commodity_state': '',
+        'price':''
+    }  
+] 
