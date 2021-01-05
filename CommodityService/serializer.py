@@ -10,13 +10,14 @@ class CommoditySerializer(serializers.Serializer):
     ('SALED','已售出'),
     ('DELETED','已删除'),
     )
-    commodity_name = serializers.CharField(label='商品名称')
-    commodity_type = serializers.CharField(label='商品类别')
-    commodity_picture =serializers.ImageField(label='图片')
-    price = serializers.DecimalField(label='价格',max_digits=5,decimal_places=2)
-    detail = serializers.CharField(label='详细描述')
-    on_shelf_time = serializers.DateTimeField(label='上架时间')
-    state = serializers.ChoiceField(choices=STATE_CHOICES,label='商品状态')
+    commodity_id = serializers.PrimaryKeyRelatedField(label='商品ID',allow_null=True)
+    commodity_name = serializers.CharField(label='商品名称',allow_null=True)
+    commodity_type = serializers.CharField(label='商品类别',allow_null=True)
+    commodity_picture =serializers.ImageField(label='图片',allow_null=True)
+    price = serializers.DecimalField(label='价格',max_digits=5,decimal_places=2,allow_null=True)
+    detail = serializers.CharField(label='详细描述',allow_null=True)
+    on_shelf_time = serializers.DateTimeField(label='上架时间',allow_null=True)
+    state = serializers.ChoiceField(choices=STATE_CHOICES,label='商品状态',allow_null=True)
 # commodity_id = models.AutoField(primary_key=True)
 # commodity_name = models.CharField(max_length=50)
 # commodity_type = models.CharField( max_length=20)
@@ -37,10 +38,10 @@ class CommodityApplicationSerializer(serializers.Serializer):
         ('APPROVED','审核通过'),
         ('REJECTED','审核未通过'),
     )
-    user = serializers.CharField(label='申请人')
-    commodity = serializers.IntegerField(label='商品')
-    apply_time = serializers.DateTimeField(label='申请时间')
-    application_state = serializers.ChoiceField(label='申请状态',choices=APPLICATION_STATE_CHOICES )
+    user = serializers.CharField(label='申请人',allow_null=True)
+    commodity = serializers.IntegerField(label='商品',allow_null=True)
+    apply_time = serializers.DateTimeField(label='申请时间',allow_null=True)
+    application_state = serializers.ChoiceField(label='申请状态',choices=APPLICATION_STATE_CHOICES,allow_null=True)
     # auditor = serializers.CharField(label='审核人')
     # audit_time = serializers.DateTimeField(label='审核时间')
 # application_id = models.AutoField(primary_key=True)
@@ -58,8 +59,8 @@ class CommodityApplicationSerializer(serializers.Serializer):
         return CommodityApplication.objects.update(pk,validated_data)
 
 class BrowserHisorySerializer(serializers.Serializer):
-    commodity = serializers.IntegerField(label='商品')
-    user =serializers.CharField(label='用户')
+    commodity = serializers.IntegerField(label='商品',allow_null=True)
+    user =serializers.CharField(label='用户',allow_null=True)
 
     def create(self,validated_data):
         return BrowserHisory.objects.create(**validated_data)

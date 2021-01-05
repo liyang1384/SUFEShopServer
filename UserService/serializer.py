@@ -18,13 +18,14 @@ class UserSerializer(serializers.Serializer):
         ('ADMINISTRATOR','管理员'),
     )
     user_name = serializers.CharField(max_length=30,label='用户名')
+    password = serializers.CharField(max_length=20,label='密码',allow_null=True)
     nickname = serializers.CharField(max_length=30,label='用户昵称',allow_null=True)
     avatar = serializers.ImageField(label='头像',allow_null=True)
     real_name = serializers.CharField(max_length=30,label='真实姓名',allow_null=True)
     sex = serializers.ChoiceField(choices=SEX_CHOICES,label='性别',allow_null=True)
     mobile = serializers.CharField(max_length=11,min_length=11,label='手机号码',allow_null=True)
-    email = serializers.EmailField(label='邮箱地址')
-    online_state = serializers.ChoiceField(choices=ONLINE_STATE_CHOICES,label='在线状态',default='OFFLINE')
+    email = serializers.EmailField(label='邮箱地址',allow_null=True)
+    online_state = serializers.ChoiceField(choices=ONLINE_STATE_CHOICES,label='在线状态',default='OFFLINE',allow_null=True)
 
 # user_id = models.AutoField(primary_key=True,unique=True)
 #     user_name = models.CharField(max_length=30)
