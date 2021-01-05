@@ -30,7 +30,8 @@ class CommodityDetail(APIView):
     def delete(self, request):
         serializer = CommoditySerializer(request.data)
         serializer.is_valid(raise_exception=True)
-        CommodityService.updateMyCommodityDetail(serializer.data.commodity_id,{'if_delete':'True'})
+        CommodityService.updateMyCommodityDetail(serializer.data.commodity_id,{'if_delete':'True','state':'DELETED'})
+
         return Response({'msg':'删除成功'})        
 
 class MyCommodityList(APIView):
@@ -44,7 +45,16 @@ class MyCommodityList(APIView):
 
 class CommodityList(APIView):
     def get(self, request):
-        query_set = CommodityService.listCommodities()
+        qurey_params = request.query_params
+        min_price = qurey_params.get('min_price')
+        max_price = qurey_params.get('max_price')
+        qurey_params.pop('min_price')
+        qurey_params.pop('max_price')
+        serializer = CommoditySerializer(qurey_params)
+        serializer.is_valid(raise_exception=True)
+        query_criteria = serializer.data
+        query_criteria.update({'price__gte': min_price,'price__lte': max_price})
+        query_set = CommodityService.listCommodities(query_criteria)
         serializer = CommoditySerializer(query_set,many=True)
         return Response(serializer.data)
 

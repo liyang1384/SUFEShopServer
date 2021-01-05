@@ -12,7 +12,7 @@ class UserService():
     @staticmethod
     def getUserList(query_criteria=None):
         if query_criteria ==None:
-            return User.objects.all()
+            return User.objects.filter(if_delete=False)
         else:
             query_criteria.update({'if_delete':'False'})
             return User.objects.filter(**query_criteria)
