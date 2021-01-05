@@ -112,3 +112,26 @@
 说明：这个不知道返回啥，先放着
 
 
+6.获取指定商品明细信息
+
+前端=>后端（没有特殊说明即为默认值）  
+{  
+        'commodity_id': ''
+        'user_id': ''
+}
+
+后端=>前端（仅表示数据格式，具体的值应由查询结果填充）  
+[  
+    {   
+        'commodity_name': '',  
+        'commodity_picture': '',
+        'commodity_type': '',
+        'user_name': '',
+        'user_id': '' //卖家的用户名、ID
+        'commodity_state': '',
+        'price': '',
+        'detail': ''
+    }  
+]  
+
+
