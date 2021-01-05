@@ -40,13 +40,18 @@ class CommodityService():
     # def deleteCommodity(commodity_id):
     #     return Commodity.objects.update(commodity_id,{'if_delete':'True'})
     @staticmethod
+    def updateMyCommodityApplicationDetail(application_id,validated_data):
+        return Commodity.objects.update(application_id,validated_data)
+    @staticmethod
+    def getMyCommodityApplicationDetail(application_id):
+        return Commodity.objects.get(application_id)
+    @staticmethod
     def listCommodities(query_criteria):
         if query_criteria ==None:
             return Commodity.objects.filter(if_delete=False)
         else:
             query_criteria.update({'if_delete':'False'})
             return Commodity.objects.filter(**query_criteria)
-
     @staticmethod
     def listBrowseHistory(user):
         return BrowserHisory.objects.filter(user=user,if_delete=False)

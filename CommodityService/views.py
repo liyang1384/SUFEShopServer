@@ -14,11 +14,11 @@ class CommodityDetail(APIView):
         instance = CommodityService.getCommodityDetail(commodity_id=serializer.data.commodity_id)
         serializer = CommoditySerializer(instance)
         return Response(serializer.data)
-    # 发布一件商品 申请有问题！
+    # 发布一件商品
     def post(self, request):
         serializer=CommoditySerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        CommodityService.insertCommodity(validated_data=serializer.data)
+        CommodityService.insertCommodity(validated_data=serializer.data)# 包含创建申请过程
         return Response(serializer.data)
 
     def put(self, request):
@@ -26,12 +26,13 @@ class CommodityDetail(APIView):
         serializer.is_valid(raise_exception=True)
         CommodityService.updateMyCommodityDetail(serializer.data.commodity_id,serializer.data)
         return Response(serializer.data)
-    # 删除商品
+    # 删除商品申请以及商品
     def delete(self, request):
         serializer = CommoditySerializer(request.data)
         serializer.is_valid(raise_exception=True)
         CommodityService.updateMyCommodityDetail(serializer.data.commodity_id,{'if_delete':'True','state':'DELETED'})
-
+        commodityapplication = CommodityService.listCommodities({'commodity':serializer.data.commodity_id}).first()
+        CommodityService.updateMyCommodityApplicationDetail(commodityapplication.application_id,{'if_delete':'True'})
         return Response({'msg':'删除成功'})        
 
 class MyCommodityList(APIView):
@@ -66,7 +67,15 @@ class AuditCommodityList(APIView):
     def patch(self, request):
         serializer = CommodityApplicationSerializer(request.data)
         serializer.is_valid(raise_exception=True)
+        commodityapplication = CommodityService.getMyCommodityApplicationDetail(serializer.data.application_id)
         CommodityService.processUnauditedCommodity(serializer.data.application_id,serializer.data)
+        # 同步修改商品状态
+        if serializer.data.application_state == 'APPROVED':
+            CommodityService.updateMyCommodityDetail(commodityapplication.commodity,{'state':'ON_THE_SHELVES'})
+        elif serializer.data.application_state == 'REJECTED':
+            CommodityService.updateMyCommodityDetail(commodityapplication.commodity,{'state':'REJECTED'})
+        else:
+            pass
         return Response(serializer.data)
 
 class BrowseHistoryList(APIView):
