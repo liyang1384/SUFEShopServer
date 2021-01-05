@@ -39,6 +39,7 @@
 后端=>前端（仅表示数据格式，具体的值应由查询结果填充）  
 [  
     {   
+        'commodity_id': '',
         'commodity_name': '',  
         'commodity_picture': '',
         'commodity_type': '',   
