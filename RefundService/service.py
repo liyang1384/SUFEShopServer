@@ -16,5 +16,9 @@ class RefundApplicationService():
         RefundApplicationService.refund(refunder,refundee)
         RefundApplication.objects.update(pk=pk,validated_data=validated_data)
     @staticmethod
+    def insertRefundDetail(validated_data):
+        RefundApplication.objects.create(validated_data)
+    @staticmethod
     def refund(refunder,refundee):
         pass
+

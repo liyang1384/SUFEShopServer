@@ -2,12 +2,21 @@ from rest_framework import serializers
 from .models import Commodity, CommodityApplication, BrowserHisory
 
 class CommoditySerializer(serializers.Serializer):
+    STATE_CHOICES = (
+    ('TO_BE_REVIEWED','待审核'),
+    ('REJECTED','未通过'),
+    ('ON_THE_SHELVES','已上架'),
+    ('RESERVED','已预定'),
+    ('SALED','已售出'),
+    ('DELETED','已删除'),
+    )
     commodity_name = serializers.CharField(label='商品名称')
     commodity_type = serializers.CharField(label='商品类别')
     commodity_picture =serializers.ImageField(label='图片')
     price = serializers.DecimalField(label='价格',max_digits=5,decimal_places=2)
     detail = serializers.CharField(label='详细描述')
     on_shelf_time = serializers.DateTimeField(label='上架时间')
+    state = serializers.ChoiceField(choices=STATE_CHOICES,label='商品状态')
 # commodity_id = models.AutoField(primary_key=True)
 # commodity_name = models.CharField(max_length=50)
 # commodity_type = models.CharField( max_length=20)

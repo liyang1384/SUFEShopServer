@@ -47,7 +47,7 @@ class User(models.Model):
         ('ADMINISTRATOR','管理员'),
     )
     user_id = models.AutoField(primary_key=True,unique=True)
-    user_name = models.CharField(max_length=30)
+    user_name = models.CharField(max_length=30,unique=True)
     nickname = models.CharField(max_length=30,default = 'new_user')
     password = models.CharField(max_length=20)
     avatar  = models.ImageField()

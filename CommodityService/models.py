@@ -38,6 +38,14 @@ class BrowserHisoryManager(models.Manager):
 
 #商品
 class Commodity(models.Model):
+    STATE_CHOICES = (
+    ('TO_BE_REVIEWED','待审核'),
+    ('REJECTED','未通过'),
+    ('ON_THE_SHELVES','已上架'),
+    ('RESERVED','已预定'),
+    ('SALED','已售出'),
+    ('DELETED','已删除'),
+    )
     commodity_id = models.AutoField(primary_key=True)
     commodity_name = models.CharField(max_length=50)
     commodity_type = models.CharField( max_length=20)
@@ -45,6 +53,7 @@ class Commodity(models.Model):
     price = models.DecimalField(max_digits=5, decimal_places=2)
     detail = models.TextField()
     on_shelf_time = models.DateTimeField(auto_now=False, auto_now_add=True)
+    state = models.CharField(choices=STATE_CHOICES,max_length=20,default='TO_BE_REVIEWED')
     if_delete = models.BooleanField(default=False)
     objects = CommodityManager()
 

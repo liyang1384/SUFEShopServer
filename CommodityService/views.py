@@ -7,47 +7,56 @@ from .service import CommodityService
 
 # CommodityItem?
 class CommodityDetail(APIView):
-    def get(self, request, commodity_id):
-        instance = CommodityService.getCommodityDetail(commodity_id=commodity_id)
+    # 查询一件商品
+    def get(self, request):
+        serializer = CommoditySerializer(request.data)
+        instance = CommodityService.getCommodityDetail(commodity_id=serializer.data.commodity_id)
         serializer = CommoditySerializer(instance)
         return Response(serializer.data)
+    # 发布一件商品 申请有问题！
     def post(self, request):
         serializer=CommoditySerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         CommodityService.insertCommodity(validated_data=serializer.data)
         return Response(serializer.data)
-    def put(self, request, commodity_id):
-        serializer=CommoditySerializer(data=request.data)
-        CommodityService.updateMyCommodityDetail(commodity_id,serializer.data)
+
+    def put(self, request):
+        serializer = CommoditySerializer(request.data)
+        CommodityService.updateMyCommodityDetail(serializer.data.commodity_id,serializer.data)
         return Response(serializer.data)
-    def delete(self, request, commodity_id):
-        return CommodityService.updateMyCommodityDetail(commodity_id,{'if_delete':'True'})
+    # 删除商品
+    def delete(self, request):
+        serializer = CommoditySerializer(request.data)
+        CommodityService.updateMyCommodityDetail(serializer.data.commodity_id,{'if_delete':'True'})
+        return Response({'msg':'删除成功'})        
 
 class MyCommodityList(APIView):
-    def get(self, request,user):
-        query_set = CommodityService.listMyCommodity(user)
-        seriliazer = CommoditySerializer(query_set)
-        return Response(seriliazer.data)
+    def get(self, request):
+        serializer = CommoditySerializer(request.data)
+        query_set = CommodityService.listMyCommodity(serializer.data.user)
+        serializer = CommoditySerializer(query_set)
+        return Response(serializer.data)
     # listcommodities()
 
 class CommodityList(APIView):
     def get(self, request):
         query_set = CommodityService.listCommodities()
-        seriliazer = CommoditySerializer(query_set)
-        return Response(seriliazer.data)
+        serializer = CommoditySerializer(query_set)
+        return Response(serializer.data)
 
 class AuditCommodityList(APIView):
     def get(self, request):
         query_set = CommodityService.listUnauditedCommodities()
-        seriliazer = CommodityApplicationSerializer(query_set,many=True)
-        return Response(seriliazer.data)
-    def patch(self, request,application_id):
+        serializer = CommodityApplicationSerializer(query_set,many=True)
+        return Response(serializer.data)
+    def patch(self, request):
         serializer = CommodityApplicationSerializer(request.data)
-        CommodityService.processUnauditedCommodity(application_id,serializer.data)
+        CommodityService.processUnauditedCommodity(serializer.data.application_id,serializer.data)
         return Response(serializer.data)
 
 class BrowseHistoryList(APIView):
-    def get(self, request,user):
-        query_set = CommodityService.listBrowseHistory(user)
+    def get(self, request):
+        serializer = CommoditySerializer(request.data)
+        query_set = CommodityService.listBrowseHistory(serializer.data.user)
         serializer = BrowserHisorySerializer(query_set,many=True)
         return Response(serializer.data)

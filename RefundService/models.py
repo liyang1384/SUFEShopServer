@@ -14,6 +14,10 @@ class RefundApplicationManager(models.Manager):
         instance.if_delete = validated_data.get('if_delete',instance.if_delete)
         instance.save()
         return instance
+    
+    def all(self):
+        return super().filter(if_delete=False)
+
 
 #退款记录
 class RefundApplication(models.Model):

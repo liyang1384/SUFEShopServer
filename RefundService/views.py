@@ -6,12 +6,19 @@ from .service import RefundApplicationService
 # Create your views here.
 
 class RefundDetail(APIView):
-    def get(self,request,pk):
-        refundapplication = RefundApplicationService.getRefundDetail(pk=pk)
+    def get(self,request):
+        serializer = RefundApplicationSerializer(request.data)
+        refundapplication = RefundApplicationService.getRefundDetail(pk=serializer.data.refund_id)
         serializer = RefundApplicationSerializer(refundapplication)
         return Response(serializer.data)
     
-    def patch(self,request,pk):
+    def patch(self,request):
         serializer=RefundApplicationSerializer(data=request.data)
-        RefundApplicationService.processRefund(pk,serializer.data)
+        RefundApplicationService.processRefund(serializer.data.refund_id,serializer.data)
+        return Response(serializer.data)
+
+    def post(self,request):
+        serializer = RefundApplicationSerializer(request.data)
+        serializer.is_valid(raise_exception=True)
+        RefundApplicationService.insertRefundDetail(serializer.data)
         return Response(serializer.data)

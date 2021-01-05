@@ -14,6 +14,7 @@ class UserService():
         if query_criteria ==None:
             return User.objects.all()
         else:
+            query_criteria.update({'if_delete':'False'})
             return User.objects.filter(**query_criteria)
 
     @staticmethod        

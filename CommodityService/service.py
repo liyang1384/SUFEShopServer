@@ -12,7 +12,7 @@ class CommodityService():
     @staticmethod
     def listUnauditedCommodities():
         unauditedcommodities = CommodityApplication.objects.filter(application_state ='TO_BE_REVIEWED').values('Commodity')
-        return Commodity.objects.filter(commodity_id__in = unauditedcommodities)
+        return Commodity.objects.filter(commodity_id__in = unauditedcommodities,if_delete=False)
     @staticmethod
     def processUnauditedCommodity(application_id,validated_data):
         return CommodityApplication.objects.update(application_id,validated_data)
@@ -29,7 +29,7 @@ class CommodityService():
     @staticmethod
     def listMyCommodity(user):
         mycommodity = CommodityApplication.objects.filter(user=user).values('Commodity')
-        return Commodity.objects.filter(commodity_id__in = mycommodity)
+        return Commodity.objects.filter(commodity_id__in = mycommodity,if_delete=False)
     @staticmethod
     def getMyCommodityDetail(commodity_id):
         return Commodity.objects.get(pk=commodity_id)
@@ -41,7 +41,7 @@ class CommodityService():
     #     return Commodity.objects.update(commodity_id,{'if_delete':'True'})
     @staticmethod
     def listCommodities():
-        return Commodity.objects.all()
+        return Commodity.objects.filter(if_delete=False)
     @staticmethod
     def listBrowseHistory(user):
-        return BrowserHisory.objects.filter(user=user)
+        return BrowserHisory.objects.filter(user=user,if_delete=False)
