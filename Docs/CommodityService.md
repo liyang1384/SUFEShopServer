@@ -130,8 +130,7 @@
         'user_id': '' //卖家的用户名、ID
         'commodity_state': '',
         'price': '',
-        'detail': '',
-        'commodity_id': ''//该用户收藏夹中所有商品的ID
+        'detail': ''
     }  
 ]  
 
