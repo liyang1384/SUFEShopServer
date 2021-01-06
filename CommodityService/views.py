@@ -9,8 +9,8 @@ from .service import CommodityService
 class CommodityDetail(APIView):
     # 查询一件商品
     def get(self, request):
-        serializer = CommoditySerializer(request.query_params)
-        # serializer.is_valid(raise_exception=True)
+        serializer = CommoditySerializer(data=request.query_params)
+        serializer.is_valid(raise_exception=True)
         instance = CommodityService.getCommodityDetail(commodity_id=serializer.data.commodity_id)
         serializer = CommoditySerializer(instance)
         return Response(serializer.data)
@@ -37,8 +37,8 @@ class CommodityDetail(APIView):
 
 class MyCommodityList(APIView):
     def get(self, request):
-        serializer = CommoditySerializer(request.query_params)
-        # serializer.is_valid(raise_exception=True)
+        serializer = CommoditySerializer(data=request.query_params)
+        serializer.is_valid(raise_exception=True)
         query_set = CommodityService.listMyCommodity(serializer.data.user)
         serializer = CommoditySerializer(query_set)
         return Response(serializer.data)
@@ -46,13 +46,13 @@ class MyCommodityList(APIView):
 
 class CommodityList(APIView):
     def get(self, request):
-        qurey_params = request.query_params
+        qurey_params = request.query_params.copy()
         min_price = qurey_params.get('min_price')
         max_price = qurey_params.get('max_price')
         qurey_params.pop('min_price')
         qurey_params.pop('max_price')
-        serializer = CommoditySerializer(qurey_params)
-        # serializer.is_valid(raise_exception=True)
+        serializer = CommoditySerializer(data=qurey_params)
+        serializer.is_valid(raise_exception=True)
         query_criteria = serializer.data
         query_criteria.update({'price__gte': min_price,'price__lte': max_price})
         query_set = CommodityService.listCommodities(query_criteria)
@@ -61,9 +61,22 @@ class CommodityList(APIView):
 
 class AuditCommodityList(APIView):
     def get(self, request):
-        query_set = CommodityService.listUnauditedCommodities()
-        serializer = CommodityApplicationSerializer(query_set,many=True)
-        return Response(serializer.data)
+        # serializer = CommoditySerializer(data=request.query_params)
+        # serializer.is_valid(raise_exception=True)
+        # query_set = CommodityService.listCommodities(serializer.data)
+        # serializer = CommodityApplicationSerializer(query_set,many=True)
+        # return Response(serializer.data)
+        qurey_params = request.query_params.copy()
+        min_price = qurey_params.get('min_price')
+        max_price = qurey_params.get('max_price')
+        qurey_params.pop('min_price')
+        qurey_params.pop('max_price')
+        serializer = CommoditySerializer(data=qurey_params)
+        serializer.is_valid(raise_exception=True)
+        query_criteria = serializer.data
+        query_criteria.update({'price__gte': min_price,'price__lte': max_price})
+        query_set = CommodityService.listCommodities(query_criteria)# 取得所有商品
+        serializer = CommoditySerializer(query_set,many=True)
     def patch(self, request):
         serializer = CommodityApplicationSerializer(request.data)
         serializer.is_valid(raise_exception=True)
@@ -80,8 +93,8 @@ class AuditCommodityList(APIView):
 
 class BrowseHistoryList(APIView):
     def get(self, request):
-        serializer = CommoditySerializer(request.query_params)
-        # serializer.is_valid(raise_exception=True)
+        serializer = CommoditySerializer(data=request.query_params)
+        serializer.is_valid(raise_exception=True)
         query_set = CommodityService.listBrowseHistory(serializer.data.user)
         serializer = BrowserHisorySerializer(query_set,many=True)
         return Response(serializer.data)
