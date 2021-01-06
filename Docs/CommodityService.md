@@ -68,7 +68,8 @@
         'price': '',
         'commodity_picture': '',
         'commodity_type':''，
-        'application_state':''
+        'application_state':'',
+        'on_shelf_time':''
     }
 ]  
 
@@ -76,9 +77,8 @@
 
 前端=>后端  
 {  
-    'commodity_name': ''  
+    'user_id': ''  
 }  
-说明：如果'commodity_name'为空，则全部商品都要查。
 
 后端=>前端（仅表示数据格式，具体的值应由查询结果填充）  
 [  

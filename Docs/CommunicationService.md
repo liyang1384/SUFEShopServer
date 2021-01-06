@@ -25,6 +25,8 @@
         'user': '',
         'online_state':'',
         'message_content': '' 
+        'send_time': '',
+        'avatar':''
     }
 ] 
-说明：user指的是这条消息的发送者，不仅要给我发每条消息的发送者，也要把发送者当前的在线情况发过来，就是online_state。
+说明：user指的是这条消息的发送者，不仅要给我发每条消息的发送者，也要把发送者当前的在线情况发过来，就是online_state，以及发送者的头像。
