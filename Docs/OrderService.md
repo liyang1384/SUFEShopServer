@@ -1,5 +1,5 @@
 # 订单业务类数据交互定义  
-1.我的订单查询  
+1.我的订单查询
 我的订单列表查询  
 前端=>后端（没有特殊说明即为默认值）  
 {  
@@ -82,15 +82,23 @@
     order_id: '',
     order_time: '',
     payment_platform: '',
-    payment_time: ''
+    payment_time: '',
+    order_type: '0'(如果是0，表示买家，如果是1，表示卖家)
 }
 
-前端=>后端
+前端=>后端（买家对卖家做出的评价）
 {
     order_id: '',
     commidity_quality: '',
     deal_speed: '',
     seller_attitude: '',
+    comment: ''
+}
+
+前端=>后端（卖家对买家做出的评价）
+{
+    order_id: '',
+    score: '',
     comment: ''
 }
 
