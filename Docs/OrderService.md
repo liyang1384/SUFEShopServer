@@ -60,7 +60,11 @@
       payment_time表示付款时间；
 
 
+<<<<<<< HEAD
 3.评价卖家
+=======
+3.订单评价（直接作为评价交易对象，假设是卖家的界面，那就把涉及买家的部分屏蔽掉）
+>>>>>>> 7af07b237c11e92190a766875e738f6b8122d6e7
 前端=>后端（没有特殊说明即为默认值）
 {
     comment: '',
@@ -80,6 +84,7 @@
     real_price: '',
     payment_platform: '',
     seller: '',
+<<<<<<< HEAD
     order_id: ''
 }
 
@@ -89,6 +94,21 @@
     commodity_type表示商品类别；
     price表示商品的标价；
     payment_platform表示支付方式；
+=======
+    buyer: '',
+    user_name: '',
+    no_of_order: ''
+}
+
+说明：
+    Image：商品图像；
+    user_name: '用户名称',
+    name_of_commidity表示商品名称；
+    class_of_commidity表示商品类别；
+    price_of_commidity表示商品的标价；
+    real_price_of_commidity表示商品的实际付价；
+    method_of_pay表示支付方式；
+>>>>>>> 7af07b237c11e92190a766875e738f6b8122d6e7
     seller表示卖家；
     comment表示用户输入的文字评论；
     commodity_quality表示用户对于“商品质量”的评价，为数字0-5；

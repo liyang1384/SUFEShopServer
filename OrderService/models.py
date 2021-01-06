@@ -89,6 +89,7 @@ class Order(models.Model):
     ORDER_STATUS = (
         ("paying", "待付款"),
         ("paid", "已付款"),
+        ("received", "已收货"),
         ("refunded", "已退款"),
         ("cancelled", "已取消"),
     )

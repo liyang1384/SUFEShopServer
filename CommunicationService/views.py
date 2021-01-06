@@ -24,3 +24,5 @@ class MessageList(APIView):
         serializer.is_valid(raise_exception=True)
         CommunicationService.insertMessage(validated_data=serializer.data)
         return Response(serializer.data) 
+
+
