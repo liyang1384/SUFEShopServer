@@ -45,8 +45,7 @@
 
 {
     user_id: '',
-    password: '',
-    new_password: ''
+    password: ''
 }
 
 
@@ -54,6 +53,13 @@
 
 {
     flag: false
+}
+
+前端=>后端（如果flag为True）
+
+{
+    user_id: '',
+    new_password: ''
 }
 
 

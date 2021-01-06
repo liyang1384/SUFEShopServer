@@ -92,7 +92,6 @@
     deal_speed: '',
     seller_attitude: '',
     comment: ''
-
 }
 
 4.生成订单

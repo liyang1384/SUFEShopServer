@@ -22,15 +22,7 @@
 2.获取个人收藏夹信息
 前端=>后端（没有特殊说明即为默认值）  
 {  
-    'user_id': '' //此处user_id不会为空，会传入具体的值
-    'commodity_name': '', 
-    'min_amount': 0,  
-    'max_amount': '',
-    'commodity_state': '',  
-    'sort': {  
-        'name' : 'collect_time',  
-        'mode' : 'desc' 
-    },  
+    'user_id': '', //此处user_id不会为空，会传入具体的值 
     'page':'1'  
 }  
   
@@ -42,8 +34,7 @@
         'commodity_id': '',
         'commodity_name': '',  
         'commodity_picture': '',
-        'commodity_type': '',   
-        'amount': ''  
+        'commodity_type': '',  
         'collect_time': ''  
         'user_name': '', //卖家的用户名  
         'commodity_state': '',
