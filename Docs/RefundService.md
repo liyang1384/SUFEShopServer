@@ -1,81 +1,66 @@
 # 退款业务类数据定义
 
-1.退款申请
-前端=>后端
+1.退款申请 (以下请求,即为业务顺序步骤)
+前端=>后端（让后端知道是哪个用户退款哪个订单）
 {
-    type_of_refund: '',
-    amount_of_refund: '',
-    status_of_goods: '',
-    way_of_refund: '',
-    reason_of_refund: '',
-    fileList: []
+    user_id: '',
+    order_id: ''
 }
 
 后端=>前端
 {
-    status_of_order表示订单状态，0和1表示退单和未退单
-    Image: '',
-    class_of_commidity: '',
+    commidity_picture: '',
+    commidity_name: '',
+    commidity_type: '',
+    price: '',
+    amount: '',
     seller: '',
-    method_of_pay: '',
-    name_of_commidity: '',
-    price_of_commidity: '',
-    real_price_of_commidity: ''
+    order_id: '',
+    order_time: '',
+    payment_time: '',
+    payment_platform: ''
 }
 
-说明：
-    Image：商品图像；
-    name_of_commidity表示商品名称；
-    class_of_commidity表示商品类别；
-    price_of_commidity表示商品的标价；
-    real_price_of_commidity表示商品的实际付价；
-    method_of_pay表示支付方式；
-    seller表示卖家；
-    type_of_refund表示退款类型；
-    amount_of_refund表示退款金额；
-    status_of_goods表示货物状态；
-    way_of_refund表示退货方式；
-    reason_of_refund表示退款原因；
-    filelist表示退款补充说明上传的图像组
-
-
-
-2.退款审核
 前端=>后端
 {
-    status_of_order: ''
-}
-后端=>前端
-{
-    status_of_order表示订单状态，0和1表示退单和未退单
-    type_of_refund: '',
-    amount_of_refund: '',
-    status_of_goods: '',
-    way_of_refund: '',
-    reason_of_refund: '',
-    Image: '',
-    class_of_commidity: '',
-    seller: '',
-    method_of_pay: '',
-    name_of_commidity: '',
-    price_of_commidity: '',
-    real_price_of_commidity: '',
-    fileList: []
+    user_id: '',
+    order_id: '',
+    refund_type: '',
+    refund_amount: '',（用户实际退款金额）
+    refund_reason: '',
+    evidence_picture: '',(可能为多张图片，待定)
+    refund_time: ''（产生退款申请的时间）
 }
 
-说明：
-    status_of_order表示订单状态，0和1表示已退单和未退单
-    Image表示商品图像；
-    name_of_commidity表示商品名称；
-    class_of_commidity表示商品类别；
-    price_of_commidity表示商品的标价；
-    real_price_of_commidity表示商品的实际付价；
-    method_of_pay表示支付方式；
-    seller表示卖家；
-    type_of_refund表示退款类型；
-    amount_of_refund表示退款金额；
-    status_of_goods表示货物状态；
-    way_of_refund表示退货方式；
-    reason_of_refund表示退款原因；
-    filelist表示退款补充说明上传的图像组
+
+
+2.退款审核  (以下请求,即为业务顺序步骤)
+前端=>后端（让后端知道在审核哪个订单）
+{
+    refund_id: ''
+}
+
+后端=>前端
+{
+    commidity_picture: '',
+    commidity_name: '',
+    price: '',
+    amount: '',
+    seller: '',
+    buyer: '',
+    order_id: '',
+    payment_platform: '',
+    refund_type: '',
+    refund_time: '',
+    refund_reason: '',
+    evidence_picture: '',
+    order_status: ''
+}
+
+前端=>后端（告诉后端是否通过退款）
+{
+    refund_id: '',
+    order_status: ''（如果同意，那么就将order_status改成已退款，否则就用原来的
+                    order_status)
+}
 
