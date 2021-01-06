@@ -14,12 +14,15 @@ class OrderSerializer(serializers.Serializer):
     )
 
     order_id = serializers.IntegerField(label='订单ID',allow_null=True,required=False)
-    commodity_id = serializers.IntegerField(label="商品ID",allow_null=True,required=False)
-    seller = serializers.IntegerField(label="卖家",allow_null=True,required=False)
-    buyer = serializers.IntegerField(label="买家",allow_null=True,required=False)
+    #commodity_id = serializers.IntegerField(label="商品ID",allow_null=True,required=False)
+    #seller = serializers.IntegerField(label="卖家",allow_null=True,required=False)
+    #buyer = serializers.IntegerField(label="买家",allow_null=True,required=False)
     amount = serializers.FloatField(label="订单金额",allow_null=True,required=False)
     order_state = serializers.ChoiceField(choices=ORDER_STATUS, label="订单状态",allow_null=True,required=False)
     order_time = serializers.DateTimeField(label="下单时间",allow_null=True,required=False)
+    commodity = CommoditySerializer(required=False)
+    seller = UserSerializer(required=False)
+    buyer = UserSerializer(required=False)
 
     def create(self,validated_data):
         return Order.objects.create(**validated_data)
@@ -69,12 +72,13 @@ class PaymentRecordSerializer(serializers.Serializer):
         ("wechat", "微信"),
     )
 
-    order_id = serializers.IntegerField(label="订单ID",allow_null=True,required=False)
+    #order_id = serializers.IntegerField(label="订单ID",allow_null=True,required=False)
     payment_id = serializers.IntegerField(label="支付记录ID",allow_null=True,required=False)
     amount = serializers.FloatField(label="支付金额",allow_null=True,required=False)
     payment_type = serializers.ChoiceField(choices=PAYMENT_TYPE, label="支付类型",allow_null=True,required=False)
     payment_platform = serializers.ChoiceField(choices=PAYMENT_PLATFORM, label="支付平台",allow_null=True,required=False)
     payment_time = serializers.DateTimeField(label="支付时间",allow_null=True,required=False)
+    order = OrderSerializer(required=False)
 
     def create(self,validated_data):
         return PaymentRecord.objects.create(**validated_data)

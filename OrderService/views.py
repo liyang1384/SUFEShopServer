@@ -6,9 +6,13 @@ from OrderService.service import OrderService
 from OrderService.serializer import OrderSerializer,BuyerReviewSerializer,SellerReviewSerializer,PaymentRecordSerializer
 from utils import delete_null
 from rest_framework import status
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_exempt
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 
 # Create your views here.
 class OrderDetail(APIView):
+    authentication_classes = [SessionAuthentication, BasicAuthentication]
     def get(self, request):
         serializer = OrderSerializer(data=request.query_params)
         serializer.is_valid(raise_exception=True)
@@ -18,6 +22,7 @@ class OrderDetail(APIView):
 
 
 class OrderList(APIView):
+    authentication_classes = [SessionAuthentication, BasicAuthentication]
     def get(self, request):
         qurey_params = request.query_params.copy()
         min_amount = qurey_params.get('min_amount')
@@ -38,6 +43,7 @@ class OrderList(APIView):
 
 
 class BuyerReviewDetail(APIView):
+    authentication_classes = [SessionAuthentication, BasicAuthentication]
     def post(self, request):
         serializer = BuyerReviewSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
@@ -46,6 +52,7 @@ class BuyerReviewDetail(APIView):
 
 
 class SellerReviewDetail(APIView):
+    authentication_classes = [SessionAuthentication, BasicAuthentication]
     def get(self, request):
         serializer = OrderSerializer(data=request.query_params)
         serializer.is_valid(raise_exception=True)
@@ -60,6 +67,7 @@ class SellerReviewDetail(APIView):
     
 
 class PayOrderDetail(APIView):
+    authentication_classes = [SessionAuthentication, BasicAuthentication]
     def post(self, request):
         serializer = PaymentRecordSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
@@ -69,6 +77,7 @@ class PayOrderDetail(APIView):
 
 
 class GenerateOrderDetail(APIView):
+    authentication_classes = [SessionAuthentication, BasicAuthentication]
     def post(self, request):
         serializer=OrderSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)

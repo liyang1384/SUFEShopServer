@@ -6,10 +6,14 @@ from FavouritesService.service import FavouritesService
 from FavouritesService.serializer import Favourites_detailSerializer
 from rest_framework import status
 from utils import delete_null
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_exempt
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 
 # Create your views here.
 # FavouritesItem/
 class FavouritesDetail(APIView):
+    authentication_classes = [SessionAuthentication, BasicAuthentication]
     def get(self, request):
         serializer = Favourites_detailSerializer(data=request.query_params)
         serializer.is_valid(raise_exception=True)
