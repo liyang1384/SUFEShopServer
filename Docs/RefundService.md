@@ -28,7 +28,6 @@
     refund_type: '',
     refund_amount: '',（用户实际退款金额）
     refund_reason: '',
-    evidence_picture: '',(可能为多张图片，待定)
     refund_time: ''（产生退款申请的时间）
 }
 
@@ -53,7 +52,6 @@
     refund_type: '',
     refund_time: '',
     refund_reason: '',
-    evidence_picture: '',
     order_status: ''
 }
 

@@ -92,9 +92,7 @@
     commidity_quality: '',
     deal_speed: '',
     seller_attitude: '',
-    comment: '',
-    evidence_picture: ''(用户作为凭证的图片，可能是一组，待定)
-
+    comment: ''
 }
 
 4.生成订单
