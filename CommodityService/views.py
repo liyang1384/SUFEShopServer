@@ -77,6 +77,7 @@ class AuditCommodityList(APIView):
         query_criteria.update({'price__gte': min_price,'price__lte': max_price})
         query_set = CommodityService.listCommodities(query_criteria)# 取得所有商品
         serializer = CommoditySerializer(query_set,many=True)
+        return Response(serializer.data)
     def patch(self, request):
         serializer = CommodityApplicationSerializer(request.data)
         serializer.is_valid(raise_exception=True)

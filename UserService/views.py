@@ -4,6 +4,7 @@ from rest_framework.views import APIView
 from django.http import JsonResponse
 from .service import UserService
 from rest_framework import status
+from utils import delete_null
 # Create your views here.
 # class UserViewSet (ModelViewSet):
 class UserList(APIView):
@@ -12,10 +13,12 @@ class UserList(APIView):
         serializer = UserSerializer(data=request.query_params)
         serializer.is_valid(raise_exception=True)
         query_criteria = serializer.data
+        delete_null(query_criteria)
+        # query_criteria = None
         query_set = UserService.getUserList(query_criteria=query_criteria)
         serializer = UserSerializer(query_set,many=True)
-        return Response(serializer.data)    
-
+        return Response(serializer.data)  
+        # return Response(query_criteria)  
 class UserDetail(APIView):
     #获取一条数据
     def get(self,request):   
@@ -57,3 +60,11 @@ class Login(APIView):
                 return Response(data={'msg':'账号已禁用'},status=status.HTTP_403_FORBIDDEN)
             else:
                 return Response(data={'msg':'登录成功!'})
+    def get(self,request):
+        serializer = UserSerializer(data=request.query_params)
+        serializer.is_valid(raise_exception=True)
+        code = UserService.getUserDetail(serializer.data.user_id).password
+        if code == serializer.data.password:
+            return Response(data={'flag':'True'})
+        else:
+            return Response(data={'flag':'False'})
