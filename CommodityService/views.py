@@ -4,7 +4,7 @@ from .serializer import CommoditySerializer,CommodityApplicationSerializer,Brows
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .service import CommodityService
-
+from utils import delete_null
 # CommodityItem?
 class CommodityDetail(APIView):
     # 查询一件商品
@@ -74,10 +74,12 @@ class AuditCommodityList(APIView):
         serializer = CommoditySerializer(data=qurey_params)
         serializer.is_valid(raise_exception=True)
         query_criteria = serializer.data
+        query_criteria = delete_null(query_criteria)
         query_criteria.update({'price__gte': min_price,'price__lte': max_price})
         query_set = CommodityService.listCommodities(query_criteria)# 取得所有商品
         serializer = CommoditySerializer(query_set,many=True)
         return Response(serializer.data)
+        # return Response(query_criteria)
     def patch(self, request):
         serializer = CommodityApplicationSerializer(request.data)
         serializer.is_valid(raise_exception=True)

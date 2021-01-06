@@ -3,6 +3,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from django.http import JsonResponse
 from .service import RefundApplicationService
+from utils import delete_null
 # Create your views here.
 
 class RefundDetail(APIView):

@@ -67,7 +67,7 @@ class CommodityApplication(models.Model):
     )
     application_id = models.AutoField(primary_key=True)
     user = models.ForeignKey("UserService.User",related_name='applier',to_field='user_id',on_delete=models.CASCADE)
-    Commodity = models.ForeignKey("Commodity",to_field='commodity_id',on_delete=models.CASCADE)
+    Commodity = models.OneToOneField(Commodity,to_field='commodity_id',on_delete=models.CASCADE)
     apply_time = models.DateTimeField(auto_now=False, auto_now_add=True)
     application_state = models.CharField(choices=APPLICATION_STATE_CHOICES,max_length=20,default='TO_BE_REVIEWED')
     auditor = models.ForeignKey("UserService.User",related_name='auditor',to_field='user_id',on_delete=models.CASCADE,blank=True)

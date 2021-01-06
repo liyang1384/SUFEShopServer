@@ -5,6 +5,8 @@ from django.http import JsonResponse
 from .service import UserService
 from rest_framework import status
 from utils import delete_null
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
 # class UserViewSet (ModelViewSet):
 class UserList(APIView):
@@ -24,27 +26,33 @@ class UserDetail(APIView):
     def get(self,request):   
         serializer = UserSerializer(data=request.query_params)
         serializer.is_valid(raise_exception=True)
-        user = UserService.getUserDetail(pk=serializer.data.user_id)
+        # user_id = serializer.data.get('user_id')
+        user = UserService.getUserDetail(pk=serializer.data.get('user_id'))
         serializer = UserSerializer(user)
         return Response(serializer.data)  
+        # return Response(user_id)  
     #删除一条数据(也可以不要)
+    @csrf_exempt
     def delete(self,request):
         serializer = UserSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        UserService.updateUserDetail(serializer.data.user_id,{'if_delete':'False'})
-        return Response({'msg':'删除成功!'})
+        # UserService.updateUserDetail(serializer.data.get('user_id'),{'if_delete':'True'})
+        # return Response({'msg':'删除成功!'})
+        return Response(serializer.data)
     
     #新增一条数据
+    @csrf_exempt
     def post(self,request):
         serializer=UserSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         UserService.insertUserInfo(validated_data=serializer.data)
         return Response(serializer.data)
     #修改一条数据
+    @csrf_exempt
     def put(self,request):
         serializer=UserSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        UserService.updateUserDetail(serializer.data.user_id,serializer.data)
+        UserService.updateUserDetail(serializer.data.get('user_id'),serializer.data)
         return Response(serializer.data)
 
 class Login(APIView):
@@ -63,8 +71,8 @@ class Login(APIView):
     def get(self,request):
         serializer = UserSerializer(data=request.query_params)
         serializer.is_valid(raise_exception=True)
-        code = UserService.getUserDetail(serializer.data.user_id).password
-        if code == serializer.data.password:
+        code = UserService.getUserDetail(serializer.data.get('user_id')).get('password')
+        if code == serializer.data.get('password'):
             return Response(data={'flag':'True'})
         else:
             return Response(data={'flag':'False'})
