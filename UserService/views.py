@@ -9,7 +9,8 @@ from rest_framework import status
 class UserList(APIView):
     #根据查询条件获取数据，没有返回查询条件就获取全部数据
     def get(self,request):
-        serializer = UserSerializer(request.query_params)
+        serializer = UserSerializer(data=request.query_params)
+        serializer.is_valid(raise_exception=True)
         query_criteria = serializer.data
         query_set = UserService.getUserList(query_criteria=query_criteria)
         serializer = UserSerializer(query_set,many=True)
@@ -18,14 +19,14 @@ class UserList(APIView):
 class UserDetail(APIView):
     #获取一条数据
     def get(self,request):   
-        serializer = UserSerializer(request.query_params)
-        # serializer.is_valid(raise_exception=True)
+        serializer = UserSerializer(data=request.query_params)
+        serializer.is_valid(raise_exception=True)
         user = UserService.getUserDetail(pk=serializer.data.user_id)
         serializer = UserSerializer(user)
         return Response(serializer.data)  
     #删除一条数据(也可以不要)
     def delete(self,request):
-        serializer = UserSerializer(request.data)
+        serializer = UserSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         UserService.updateUserDetail(serializer.data.user_id,{'if_delete':'False'})
         return Response({'msg':'删除成功!'})
