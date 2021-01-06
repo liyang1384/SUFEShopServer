@@ -9,7 +9,7 @@ from FavouritesService.serializer import Favourites_detailSerializer
 # FavouritesItem/
 class FavouritesDetail(APIView):
     def get(self, request):
-        serializer = Favourites_detailSerializer(request.query_params)
+        serializer = Favourites_detailSerializer(data=request.query_params)
         serializer.is_valid(raise_exception=True)
         instance = FavouritesService.getFavourites(user=serializer.data.user)
         serializer = Favourites_detailSerializer(instance)
