@@ -60,60 +60,47 @@
       payment_time表示付款时间；
 
 
-<<<<<<< HEAD
-3.评价卖家
-=======
 3.订单评价（直接作为评价交易对象，假设是卖家的界面，那就把涉及买家的部分屏蔽掉）
->>>>>>> 7af07b237c11e92190a766875e738f6b8122d6e7
 前端=>后端（没有特殊说明即为默认值）
 {
+    score：5，
     comment: '',
     commodity_quality: 5,
     deal_speed: 5,
     seller_attitude: 5,
+    order_id,
 }
 
 后端=>前端（没有特殊说明即为默认值）
 {
-    order_state表示订单状态
     order_state: '',
     commodity_picture: '',
     commodity_name: '',
     commodity_type: '',
     price: '',
-    real_price: '',
     payment_platform: '',
     seller: '',
-<<<<<<< HEAD
+    buyer: '',
+    user_name: '',
     order_id: ''
 }
 
 说明：
+    order_state表示订单状态
     commodity_picture：商品图像；
     commodity_name表示商品名称；
     commodity_type表示商品类别；
     price表示商品的标价；
     payment_platform表示支付方式；
-=======
-    buyer: '',
-    user_name: '',
-    no_of_order: ''
-}
-
-说明：
-    Image：商品图像；
-    user_name: '用户名称',
-    name_of_commidity表示商品名称；
-    class_of_commidity表示商品类别；
-    price_of_commidity表示商品的标价；
-    real_price_of_commidity表示商品的实际付价；
-    method_of_pay表示支付方式；
->>>>>>> 7af07b237c11e92190a766875e738f6b8122d6e7
     seller表示卖家；
+    buyer表示买家；
+    user_name表示用户名称；
+    order_id表示订单ID；
+    score表示对买家的综合评分，为数字0-5；
     comment表示用户输入的文字评论；
-    commodity_quality表示用户对于“商品质量”的评价，为数字0-5；
-    deal_speed表示用户对“交易速度”的评价，为数字0-5；
-    seller_attitude表示用户对“卖家态度”的评价，为数字0-5；
+    commodity_quality表示对于卖家“商品质量”的评价，为数字0-5；
+    deal_speed表示对卖家“交易速度”的评价，为数字0-5；
+    seller_attitude表示对卖家“卖家态度”的评价，为数字0-5；
 
 
 4.生成订单
