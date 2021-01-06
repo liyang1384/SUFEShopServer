@@ -13,7 +13,7 @@ class OrderService():
 
     @staticmethod
     def getOrderDetail(order_id):
-        return Order.objects.get(pk=order_id)
+        return Order.objects.filter(pk=order_id)
 
     @staticmethod
     def insertOrder(validated_data):

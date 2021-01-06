@@ -16,10 +16,9 @@ class OrderDetail(APIView):
     def get(self, request):
         serializer = OrderSerializer(data=request.query_params)
         serializer.is_valid(raise_exception=True)
-        instance = OrderService.getOrderDetail(order_id=serializer.data.get('order_id'))
+        instance = OrderService. getOrderDetail(order_id=serializer.data.get('order_id'))
         serializer = OrderSerializer(instance)
         return Response(serializer.data)
-
 
 class OrderList(APIView):
     authentication_classes = [SessionAuthentication, BasicAuthentication]
@@ -56,7 +55,7 @@ class SellerReviewDetail(APIView):
     def get(self, request):
         serializer = OrderSerializer(data=request.query_params)
         serializer.is_valid(raise_exception=True)
-        instance = OrderService.getOrderDetail(order_id=serializer.data.get('order_id'))
+        instance = OrderService. getOrderDetail(order_id=serializer.data.get('order_id'))
         serializer = OrderSerializer(instance)
         return Response(serializer.data)
     def post(self, request):
