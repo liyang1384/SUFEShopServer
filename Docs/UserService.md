@@ -25,7 +25,7 @@
     email: '',
     mobile: '',
     credit: '',  （信誉分）
-    portrait: '', （头像）
+    avatar: '', （头像）
 
 }
 
@@ -36,7 +36,7 @@
     email为用户邮箱，
     mobile为用户手机号码，
     credit为用户信誉分，初始为80，
-    avator为用户头像，是一个图像
+    avatar为用户头像，是一个图像
 
 
 2.修改密码 (以下请求,即为业务顺序步骤)
