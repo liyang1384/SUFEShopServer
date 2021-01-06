@@ -88,11 +88,13 @@
     method_of_pay: '',
     seller: '',
     buyer: '',
+    user_name: '',
     no_of_order: ''
 }
 
 说明：
     Image：商品图像；
+    user_name: '用户名称',
     name_of_commidity表示商品名称；
     class_of_commidity表示商品类别；
     price_of_commidity表示商品的标价；
