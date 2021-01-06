@@ -26,7 +26,7 @@
         'commodity_picture': '',  
         'amount': ''  
         'order_time': ''  
-        'username': '', //交易对方的用户名  
+        'user_name': '', //交易对方的用户名  
         'order_state': ''  
     },  
     ... # 最多10条  
@@ -36,7 +36,6 @@
 2.订单信息查询  (以下请求,即为业务顺序步骤)
 前端=>后端（让后端知道是哪个用户，查哪个订单）
 {
-    user_id: '',
     order_id: ''
 }
 后端=>前端（没有特殊说明即为默认值）
@@ -88,21 +87,19 @@
 
 前端=>后端
 {
-    user_id: '',
     order_id: '',
     commidity_quality: '',
     deal_speed: '',
     seller_attitude: '',
-    comment: '',
-    evidence_picture: ''(用户作为凭证的图片，可能是一组，待定)
-
+    comment: ''
 }
 
 4.生成订单
 前端=>后端（没有特殊说明即为默认值）  
 {  
         'commodity_id': '',
-        'user_id': '',
+        'seller': '',
+        'buyer': '',
         'amount': ''
 }
 
@@ -121,10 +118,9 @@
 前端=>后端（没有特殊说明即为默认值）  
 {  
         'order_id': '',
-        'user_id': '',
         'payment_platform': '',
         'payment_type': '买家付款给平台',
-        'order_status': '已付款'
+        'amount': ''
 }
 
 后端=>前端（仅表示数据格式，具体的值应由查询结果填充）  

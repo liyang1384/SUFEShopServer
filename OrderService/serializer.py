@@ -14,7 +14,7 @@ class OrderSerializer(serializers.Serializer):
     )
 
     order_id = serializers.IntegerField(label='订单ID',allow_null=True)
-    commodity = serializers.IntegerField(label="商品",allow_null=True)
+    commodity_id = serializers.IntegerField(label="商品ID",allow_null=True)
     seller = serializers.IntegerField(label="卖家",allow_null=True)
     buyer = serializers.IntegerField(label="买家",allow_null=True)
     amount = serializers.FloatField(label="订单金额",allow_null=True)
@@ -29,7 +29,7 @@ class OrderSerializer(serializers.Serializer):
 
 
 class BuyerReviewSerializer(serializers.Serializer):
-    order = serializers.IntegerField(label="订单",allow_null=True)
+    order_id = serializers.IntegerField(label="订单ID",allow_null=True)
     score = serializers.IntegerField(label="综合评分",allow_null=True)
     comment = serializers.CharField(label="文字评价",allow_null=True)
     review_time = serializers.DateTimeField(label="评价时间",allow_null=True)
@@ -42,7 +42,7 @@ class BuyerReviewSerializer(serializers.Serializer):
 
 
 class SellerReviewSerializer(serializers.Serializer):
-    order = serializers.IntegerField(label="订单",allow_null=True)
+    order_id = serializers.IntegerField(label="订单ID",allow_null=True)
     commodity_quality = serializers.IntegerField(label="商品质量",allow_null=True)
     deal_speed = serializers.IntegerField(label="交易速度",allow_null=True)
     seller_attitude = serializers.IntegerField(label="卖家态度",allow_null=True)
@@ -69,7 +69,7 @@ class PaymentRecordSerializer(serializers.Serializer):
         ("wechat", "微信"),
     )
 
-    order = serializers.IntegerField(label="订单ID",allow_null=True)
+    order_id = serializers.IntegerField(label="订单ID",allow_null=True)
     payment_id = serializers.IntegerField(label="支付记录ID",allow_null=True)
     amount = serializers.FloatField(label="支付金额",allow_null=True)
     payment_type = serializers.ChoiceField(choices=PAYMENT_TYPE, label="支付类型",allow_null=True)
