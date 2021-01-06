@@ -4,6 +4,8 @@ from rest_framework.views import APIView
 from django.http import JsonResponse
 from CommunicationService.service import CommunicationService
 from CommunicationService.serializer import MessageSerializer
+from rest_framework import status
+from utils import delete_null
 
 # Create your views here.
 class MessageDetail(APIView):

@@ -4,6 +4,8 @@ from rest_framework.views import APIView
 from django.http import JsonResponse
 from OrderService.service import OrderService
 from OrderService.serializer import OrderSerializer,BuyerReviewSerializer,SellerReviewSerializer,PaymentRecordSerializer
+from utils import delete_null
+from rest_framework import status
 
 # Create your views here.
 class OrderDetail(APIView):
@@ -17,14 +19,15 @@ class OrderDetail(APIView):
 
 class OrderList(APIView):
     def get(self, request):
-        qurey_params = request.query_params
+        qurey_params = request.query_params.copy()
         min_amount = qurey_params.get('min_amount')
         max_amount = qurey_params.get('max_amount')
         qurey_params.pop('min_amount')
         qurey_params.pop('max_amount')
-        serializer = OrderSerializer(data=request.query_params)
+        serializer = OrderSerializer(data=qurey_params)
         serializer.is_valid(raise_exception=True)
         query_criteria = serializer.data
+        delete_null(query_criteria)
         query_criteria.update({'amount__gte': min_amount,'amount__lte': max_amount})
         if query_criteria.order_type == 0:
             query_set = OrderService.listBoughtOrder(query_criteria.user_id)
@@ -49,11 +52,10 @@ class SellerReviewDetail(APIView):
         instance = OrderService.getOrderDetail(order_id=serializer.data.order_id)
         serializer = OrderSerializer(instance)
         return Response(serializer.data)
-
     def post(self, request):
         serializer = SellerReviewSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        OrderService.insertSellerReview(serializer.data.order_id)
+        OrderService.insertSellerReview(serializer.data)
         return Response(serializer.data)
     
 
