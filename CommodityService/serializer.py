@@ -9,7 +9,7 @@ class CommodityApplicationSerializer(serializers.Serializer):
     )
     application_id = serializers.IntegerField(label='申请ID',allow_null=True,required=False)
     user = serializers.CharField(label='申请人',allow_null=True,required=False)
-    commodity = serializers.IntegerField(label='商品',allow_null=True,required=False)
+    # commodity = serializers.IntegerField(label='商品',allow_null=True,required=False)
     apply_time = serializers.DateTimeField(label='申请时间',allow_null=True,required=False)
     application_state = serializers.ChoiceField(label='申请状态',choices=APPLICATION_STATE_CHOICES,allow_null=True,required=False)
     # auditor = serializers.CharField(label='审核人')
