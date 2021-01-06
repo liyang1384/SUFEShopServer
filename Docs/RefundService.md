@@ -23,6 +23,8 @@
 
 前端=>后端
 {
+    user_id: '',
+    order_id: '',
     refund_type: '',
     refund_amount: '',（用户实际退款金额）
     refund_reason: '',
@@ -57,6 +59,7 @@
 
 前端=>后端（告诉后端是否通过退款）
 {
+    refund_id: '',
     order_status: ''（如果同意，那么就将order_status改成已退款，否则就用原来的
                     order_status)
 }

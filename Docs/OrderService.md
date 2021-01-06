@@ -88,6 +88,8 @@
 
 前端=>后端
 {
+    user_id: '',
+    order_id: '',
     commidity_quality: '',
     deal_speed: '',
     seller_attitude: '',
