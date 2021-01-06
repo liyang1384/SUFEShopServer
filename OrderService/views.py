@@ -10,25 +10,26 @@ class OrderDetail(APIView):
     def get(self, request):
         serializer = OrderSerializer(data=request.query_params)
         serializer.is_valid(raise_exception=True)
-        instance = OrderService.getOrderDetail(order_id=serializer.data.order_id)
+        instance = OrderService.getOrderDetail(order_id=serializer.data)
         serializer = OrderSerializer(instance)
         return Response(serializer.data)
 
 
-class BoughtOrderList(APIView):
+class OrderList(APIView):
     def get(self, request):
+        qurey_params = request.query_params
+        min_amount = qurey_params.get('min_amount')
+        max_amount = qurey_params.get('max_amount')
+        qurey_params.pop('min_amount')
+        qurey_params.pop('max_amount')
         serializer = OrderSerializer(data=request.query_params)
         serializer.is_valid(raise_exception=True)
-        query_set = OrderService.listBoughtOrder(serializer.data.buyer)
-        serializer = OrderSerializer(query_set,many=True)
-        return Response(serializer.data)
-
-
-class SoldOrderList(APIView):
-    def get(self, request):
-        serializer = OrderSerializer(data=request.query_params)
-        serializer.is_valid(raise_exception=True)
-        query_set = OrderService.listSoldOrder(serializer.data.seller)
+        query_criteria = serializer.data
+        query_criteria.update({'amount__gte': min_amount,'amount__lte': max_amount})
+        if query_criteria.order_type == 0:
+            query_set = OrderService.listBoughtOrder(query_criteria.user_id)
+        else:
+            query_set = OrderService.listSoldOrder(query_criteria.user_id)
         serializer = OrderSerializer(query_set,many=True)
         return Response(serializer.data)
 
@@ -42,10 +43,17 @@ class BuyerReviewDetail(APIView):
 
 
 class SellerReviewDetail(APIView):
+    def get(self, request):
+        serializer = OrderSerializer(data=request.query_params)
+        serializer.is_valid(raise_exception=True)
+        instance = OrderService.getOrderDetail(order_id=serializer.data.order_id)
+        serializer = OrderSerializer(instance)
+        return Response(serializer.data)
+
     def post(self, request):
         serializer = SellerReviewSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        OrderService.insertSellerReview(serializer.data)
+        OrderService.insertSellerReview(serializer.data.order_id)
         return Response(serializer.data)
     
 
