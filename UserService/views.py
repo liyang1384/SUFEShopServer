@@ -19,7 +19,7 @@ class UserDetail(APIView):
     #获取一条数据
     def get(self,request):   
         serializer = UserSerializer(request.query_params)
-        serializer.is_valid(raise_exception=True)
+        # serializer.is_valid(raise_exception=True)
         user = UserService.getUserDetail(pk=serializer.data.user_id)
         serializer = UserSerializer(user)
         return Response(serializer.data)  

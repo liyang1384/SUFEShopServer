@@ -8,7 +8,7 @@ from .service import RefundApplicationService
 class RefundDetail(APIView):
     def get(self,request):
         serializer = RefundApplicationSerializer(request.query_params)
-        serializer.is_valid(raise_exception=True)
+        # serializer.is_valid(raise_exception=True)
         refundapplication = RefundApplicationService.getRefundDetail(pk=serializer.data.refund_id)
         serializer = RefundApplicationSerializer(refundapplication)
         return Response(serializer.data)

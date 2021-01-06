@@ -17,7 +17,8 @@ class UserSerializer(serializers.Serializer):
         ('USER','用户'),
         ('ADMINISTRATOR','管理员'),
     )
-    user_name = serializers.CharField(max_length=30,label='用户名',read_only='True')
+    user_id = serializers.IntegerField(label='用户ID',allow_null=True,read_only='True')
+    user_name = serializers.CharField(max_length=30,label='用户名',read_only='True',allow_null=True)
     password = serializers.CharField(max_length=20,label='密码',allow_null=True)
     nickname = serializers.CharField(max_length=30,label='用户昵称',allow_null=True)
     avatar = serializers.ImageField(label='头像',allow_null=True)

@@ -10,7 +10,7 @@ class CommoditySerializer(serializers.Serializer):
     ('SALED','已售出'),
     ('DELETED','已删除'),
     )
-    commodity_id = serializers.PrimaryKeyRelatedField(label='商品ID',allow_null=True,read_only='True')
+    commodity_id = serializers.IntegerField(label='商品ID',allow_null=True,read_only='True')
     commodity_name = serializers.CharField(label='商品名称',allow_null=True)
     commodity_type = serializers.CharField(label='商品类别',allow_null=True)
     commodity_picture =serializers.ImageField(label='图片',allow_null=True)
@@ -38,6 +38,7 @@ class CommodityApplicationSerializer(serializers.Serializer):
         ('APPROVED','审核通过'),
         ('REJECTED','审核未通过'),
     )
+    application_id = serializers.IntegerField(label='申请ID',allow_null=True,read_only='True')
     user = serializers.CharField(label='申请人',allow_null=True)
     commodity = serializers.IntegerField(label='商品',allow_null=True)
     apply_time = serializers.DateTimeField(label='申请时间',allow_null=True)
