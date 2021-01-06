@@ -23,10 +23,6 @@
 前端=>后端（没有特殊说明即为默认值）  
 {  
     'user_id': '', //此处user_id不会为空，会传入具体的值 
-    'sort': {  
-        'name' : 'collect_time',  
-        'mode' : 'desc' 
-    },  
     'page':'1'  
 }  
   
