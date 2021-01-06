@@ -8,7 +8,7 @@ class CommunicationService():
 
     @staticmethod
     def insertMessage(validated_data):
-        messagedata = validated_data['user','receive_user','message_content','detail']
+        messagedata = validated_data['user','receive_user','message_content']
         Message.objects.create(messagedata)
 
     @staticmethod
