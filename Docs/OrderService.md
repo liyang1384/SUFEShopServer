@@ -48,8 +48,8 @@
     order_time: '',
     order_id: '',
     payment_platform: '',
-    payment_time: '', 
-    seller: '',
+    payment_time: '',
+    seller：'',
     buyer: ''
 }
 
@@ -65,42 +65,35 @@
 
 
 3.订单评价   (以下请求,即为业务顺序步骤)
-前端=>后端（让后端知道哪个用户评价哪个订单）
+前端=>后端 (让后端知道哪个用户评价哪个订单)
 {
-    user_id: '',
-    order_id: ''
+    order_id: '',
+    user_id: ''
 }
 
 后端=>前端
 {
     commidity_picture: '',
     commidity_name: '',
-    commidity_amount: '',
+    amount: '',  //实际付款
     commidity_type: '',
-    price: '',
+    price: '',  //商品金额
     seller: '',
     order_id: '',
     order_time: '',
     payment_platform: '',
-    payment_time: '',
-    order_type: '0'(如果是0，表示买家，如果是1，表示卖家)
+    payment_time: ''
 }
 
-前端=>后端（买家对卖家做出的评价）
+前端=>后端
 {
     order_id: '',
-    commidity_quality: '',
-    deal_speed: '',
-    seller_attitude: '',
+    commodity_quality: '', 
+    deal_speed: '',  
+    seller_attitude: '',  
     comment: ''
 }
 
-前端=>后端（卖家对买家做出的评价）
-{
-    order_id: '',
-    score: '',
-    comment: ''
-}
 
 4.生成订单
 前端=>后端（没有特殊说明即为默认值）  
