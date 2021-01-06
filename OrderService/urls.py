@@ -1,6 +1,6 @@
 from rest_framework import routers
 from django.urls import include, path
-from OrderService.views import OrderDetail,OrderList,BuyerReviewDetail,SellerReviewDetail,PayOrderDetail,GenerateOrderDetail
+from OrderService.views import OrderDetail,OrderList,BuyerReviewDetail,SellerReviewDetail,PayOrderDetail,GenerateOrderDetail,ConfirmReceived
 
 urlpatterns = [
     path('orderdetail/',OrderDetail.as_view()),
@@ -9,5 +9,5 @@ urlpatterns = [
     path('sellerreviewdetail/',SellerReviewDetail.as_view()),
     path('payorderdetail/',PayOrderDetail.as_view()),
     path('generateorderdetail/',GenerateOrderDetail.as_view()),
-    
+    path('confirmreceived/',ConfirmReceived.as_view()),
 ]

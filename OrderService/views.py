@@ -16,7 +16,7 @@ class OrderDetail(APIView):
     def get(self, request):
         serializer = OrderSerializer(data=request.query_params)
         serializer.is_valid(raise_exception=True)
-        instance = OrderService.getOrderDetail(order_id=serializer.data)
+        instance = OrderService.getOrderDetail(order_id=serializer.data.get('order_id'))
         serializer = OrderSerializer(instance)
         return Response(serializer.data)
 
@@ -35,9 +35,9 @@ class OrderList(APIView):
         delete_null(query_criteria)
         query_criteria.update({'amount__gte': min_amount,'amount__lte': max_amount})
         if query_criteria.order_type == 0:
-            query_set = OrderService.listBoughtOrder(query_criteria.user_id)
+            query_set = OrderService.listBoughtOrder(query_criteria.get('user_id'))
         else:
-            query_set = OrderService.listSoldOrder(query_criteria.user_id)
+            query_set = OrderService.listSoldOrder(query_criteria.get('user_id'))
         serializer = OrderSerializer(query_set,many=True)
         return Response(serializer.data)
 
@@ -56,7 +56,7 @@ class SellerReviewDetail(APIView):
     def get(self, request):
         serializer = OrderSerializer(data=request.query_params)
         serializer.is_valid(raise_exception=True)
-        instance = OrderService.getOrderDetail(order_id=serializer.data.order_id)
+        instance = OrderService.getOrderDetail(order_id=serializer.data.get('order_id'))
         serializer = OrderSerializer(instance)
         return Response(serializer.data)
     def post(self, request):
@@ -82,6 +82,15 @@ class GenerateOrderDetail(APIView):
         serializer=OrderSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         OrderService.insertOrder(serializer.data)
+        return Response(serializer.data)
+
+
+class ConfirmReceived(APIView):
+    authentication_classes = [SessionAuthentication, BasicAuthentication]
+    def put(self, request):
+        serializer = OrderSerializer(request.data)
+        serializer.is_valid(raise_exception=True)
+        OrderService.updateOrderState(serializer.data.order_id)
         return Response(serializer.data)
    
 

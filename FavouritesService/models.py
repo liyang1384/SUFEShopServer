@@ -4,7 +4,7 @@ from UserService.models import User
 from CommodityService.models import Commodity
 
 # Create your models here.
-class FavouritesDetailManager(models.Manager):
+class FavouriteDetailManager(models.Manager):
     
     def create(self,validated_data):
         return super().create(**validated_data)
@@ -22,7 +22,7 @@ class Favourites_detail(models.Model):
     favourites_detail_id = models.AutoField(primary_key=True)
     collect_time = models.DateTimeField(auto_now=False, auto_now_add=True, null=True, blank=True, verbose_name="收藏时间")
     if_delete = models.BooleanField(default=False)
-    objects = FavouritesDetailManager()
+    objects = FavouriteDetailManager()
 
     class Meta:
         verbose_name = "收藏夹明细"

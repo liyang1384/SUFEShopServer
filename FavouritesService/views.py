@@ -17,8 +17,8 @@ class FavouritesDetail(APIView):
     def get(self, request):
         serializer = Favourites_detailSerializer(data=request.query_params)
         serializer.is_valid(raise_exception=True)
-        instance = FavouritesService.getFavourites(user_id=serializer.data.user_id)
-        serializer = Favourites_detailSerializer(instance,many=True)
+        instance = FavouritesService.getFavourites(user_id=serializer.data.get('user_id'))
+        serializer = Favourites_detailSerializer(instance)
         return Response(serializer.data)
 
     def post(self, request):
@@ -30,5 +30,5 @@ class FavouritesDetail(APIView):
     def delete(self, request):
         serializer = Favourites_detailSerializer(request.data)
         serializer.is_valid(raise_exception=True)
-        FavouritesService.deleteCommodityFromFavourites(serializer.data.commodity_id,serializer.data.user_id)
+        FavouritesService.deleteCommodityFromFavourites(serializer.data.get('commodity_id'),serializer.data.get('user_id'))
         return Response({'msg':'删除成功!'})
