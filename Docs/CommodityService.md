@@ -134,4 +134,21 @@
     }  
 ]  
 
+7.指定删除我的商品
+前端=>后端  
+{  
+    'commodity_id': ''
+}  
 
+后端=>前端（仅表示数据格式，具体的值应由查询结果填充）  
+[  
+    {    
+        'commodity_id': '',
+        'commodity_name': '',  
+        'price': '',
+        'commodity_picture': '',
+        'commodity_type':''，
+        'application_state':''
+    }
+]  
+说明：删除一个后返回剩余所有的 
