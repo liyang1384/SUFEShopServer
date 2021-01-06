@@ -23,13 +23,12 @@ class OrderService():
         Commodity.objects.update(commodity_id,{'state':'已预定'})
 
     @staticmethod 
-    def payOrder(order_id,validated_data):
+    def payOrder(order_id):
         OrderService.pay(order_id)
         Order.objects.update(order_id,{'order_state':"已付款"})
         paidorder = Order.objects.get(order_id=order_id)
         commodity_id = paidorder.commodity
         Commodity.objects.update(commodity_id,{'state':'已售出'})
-        OrderService.insertPaymentRecord(validated_data)
 
     @staticmethod
     def insertPaymentRecord(validated_data):
