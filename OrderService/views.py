@@ -8,7 +8,7 @@ from OrderService.serializer import OrderSerializer,BuyerReviewSerializer,Seller
 # Create your views here.
 class OrderDetail(APIView):
     def get(self, request):
-        serializer = OrderSerializer(request.query_params)
+        serializer = OrderSerializer(data=request.query_params)
         serializer.is_valid(raise_exception=True)
         instance = OrderService.getOrderDetail(order_id=serializer.data.order_id)
         serializer = OrderSerializer(instance)
@@ -17,7 +17,7 @@ class OrderDetail(APIView):
 
 class BoughtOrderList(APIView):
     def get(self, request):
-        serializer = OrderSerializer(request.query_params)
+        serializer = OrderSerializer(data=request.query_params)
         serializer.is_valid(raise_exception=True)
         query_set = OrderService.listBoughtOrder(serializer.data.buyer)
         serializer = OrderSerializer(query_set,many=True)
@@ -26,7 +26,7 @@ class BoughtOrderList(APIView):
 
 class SoldOrderList(APIView):
     def get(self, request):
-        serializer = OrderSerializer(request.query_params)
+        serializer = OrderSerializer(data=request.query_params)
         serializer.is_valid(raise_exception=True)
         query_set = OrderService.listSoldOrder(serializer.data.seller)
         serializer = OrderSerializer(query_set,many=True)
