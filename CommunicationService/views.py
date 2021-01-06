@@ -7,10 +7,13 @@ from CommunicationService.serializer import MessageSerializer
 
 # Create your views here.
 class MessageDetail(APIView):
-    def get(self, request, receive_user):
-        instance = CommunicationService.getMessage(receive_user=receive_user)
+    def get(self, request):
+        serializer = MessageSerializer(request.query_params)
+        serializer.is_valid(raise_exception=True)
+        instance = CommunicationService.getMessage(receive_user=serializer.data.receive_user)
         serializer = MessageSerializer(instance)
         return Response(serializer.data)
+
     def post(self, request):
         serializer = MessageSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)

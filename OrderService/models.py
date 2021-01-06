@@ -158,7 +158,9 @@ class PaymentRecord(models.Model):
 
     PAYMENT_PLATFORM = (
         ("alipay", "支付宝"),
-        ("wechat", "微信"),
+        ("onlinebank", "网上银行"),
+        ("wechat", "微信支付"),
+        ("jingdongpay", "京东支付"),
     )
 
     order = models.ForeignKey(Order, on_delete=models.CASCADE, verbose_name="订单")
