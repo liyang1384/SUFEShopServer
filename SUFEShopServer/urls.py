@@ -19,5 +19,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('user/',include('UserService.urls')),
     path('refund/',include('RefundService.urls')),
-    path('commodity/',include('CommodityService.urls'))
+    path('commodity/',include('CommodityService.urls')),
+    path('communication/',include('CommunicationService.urls')),
+    path('favourites/',include('FavouritesService.urls')),
+    path('order/',include('OrderService.urls')),
 ]

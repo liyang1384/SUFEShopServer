@@ -10,7 +10,7 @@ class CommoditySerializer(serializers.Serializer):
     ('SALED','已售出'),
     ('DELETED','已删除'),
     )
-    commodity_id = serializers.PrimaryKeyRelatedField(label='商品ID',allow_null=True)
+    commodity_id = serializers.PrimaryKeyRelatedField(label='商品ID',allow_null=True,read_only='True')
     commodity_name = serializers.CharField(label='商品名称',allow_null=True)
     commodity_type = serializers.CharField(label='商品类别',allow_null=True)
     commodity_picture =serializers.ImageField(label='图片',allow_null=True)

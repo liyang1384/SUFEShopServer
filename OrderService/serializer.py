@@ -13,12 +13,13 @@ class OrderSerializer(serializers.Serializer):
         ("cancelled", "已取消"),
     )
 
-    commodity = serializers.CharField(label="商品")
-    seller = serializers.CharField(label="卖家")
-    buyer = serializers.CharField(label="买家")
-    amount = serializers.FloatField(label="订单金额")
-    order_state = serializers.CharField(choices=ORDER_STATUS, label="订单状态")
-    order_time = serializers.DateTimeField(label="下单时间")
+    order_id = serializers.IntegerField(label='订单ID',allow_null=True)
+    commodity = serializers.IntegerField(label="商品",allow_null=True)
+    seller = serializers.IntegerField(label="卖家",allow_null=True)
+    buyer = serializers.IntegerField(label="买家",allow_null=True)
+    amount = serializers.FloatField(label="订单金额",allow_null=True)
+    order_state = serializers.CharField(choices=ORDER_STATUS, label="订单状态",allow_null=True)
+    order_time = serializers.DateTimeField(label="下单时间",allow_null=True)
 
     def create(self,validated_data):
         return Order.objects.create(**validated_data)
@@ -28,10 +29,10 @@ class OrderSerializer(serializers.Serializer):
 
 
 class BuyerReviewSerializer(serializers.Serializer):
-    order = serializers.CharField(label="订单")
-    score = serializers.IntegerField(label="综合评分")
-    comment = serializers.CharField(label="文字评价")
-    review_time = serializers.DateTimeField(label="评价时间")
+    order = serializers.IntegerField(label="订单",allow_null=True)
+    score = serializers.IntegerField(label="综合评分",allow_null=True)
+    comment = serializers.CharField(label="文字评价",allow_null=True)
+    review_time = serializers.DateTimeField(label="评价时间",allow_null=True)
 
     def create(self,validated_data):
         return BuyerReview.objects.create(**validated_data)
@@ -41,12 +42,12 @@ class BuyerReviewSerializer(serializers.Serializer):
 
 
 class SellerReviewSerializer(serializers.Serializer):
-    order = serializers.CharField(label="订单")
-    commodity_quality = serializers.IntegerField(label="商品质量")
-    deal_speed = serializers.IntegerField(label="交易速度")
-    seller_attitude = serializers.IntegerField(label="卖家态度")
-    comment = serializers.CharField(label="文字评价")
-    review_time = serializers.DateTimeField(label="评价时间")
+    order = serializers.IntegerField(label="订单",allow_null=True)
+    commodity_quality = serializers.IntegerField(label="商品质量",allow_null=True)
+    deal_speed = serializers.IntegerField(label="交易速度",allow_null=True)
+    seller_attitude = serializers.IntegerField(label="卖家态度",allow_null=True)
+    comment = serializers.CharField(label="文字评价",allow_null=True)
+    review_time = serializers.DateTimeField(label="评价时间",allow_null=True)
 
     def create(self,validated_data):
         return SellerReview.objects.create(**validated_data)
@@ -68,12 +69,12 @@ class PaymentRecordSerializer(serializers.Serializer):
         ("wechat", "微信"),
     )
 
-    order = serializers.CharField(label="订单ID")
-    payment_id = serializers.CharField(label="支付记录ID")
-    amount = serializers.FloatField(label="支付金额")
-    payment_type = serializers.CharField(choices=PAYMENT_TYPE, label="支付类型")
-    payment_platform = serializers.CharField(choices=PAYMENT_PLATFORM, label="支付平台")
-    payment_time = serializers.DateTimeField(label="支付时间")
+    order = serializers.IntegerField(label="订单ID",allow_null=True)
+    payment_id = serializers.IntegerField(label="支付记录ID",allow_null=True)
+    amount = serializers.FloatField(label="支付金额",allow_null=True)
+    payment_type = serializers.CharField(choices=PAYMENT_TYPE, label="支付类型",allow_null=True)
+    payment_platform = serializers.CharField(choices=PAYMENT_PLATFORM, label="支付平台",allow_null=True)
+    payment_time = serializers.DateTimeField(label="支付时间",allow_null=True)
 
     def create(self,validated_data):
         return PaymentRecord.objects.create(**validated_data)

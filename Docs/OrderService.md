@@ -33,80 +33,70 @@
 ]  
 
 
-2.订单信息查询
+2.订单信息查询  (以下请求,即为业务顺序步骤)
+前端=>后端（让后端知道是哪个用户，查哪个订单）
+{
+    user_id: '',
+    order_id: ''
+}
 后端=>前端（没有特殊说明即为默认值）
 {
-    status_of_order: '',
-    Image: '',
-    name_of_commidity: '',
-    class_of_commidity: '',
-    price_of_commidity: '',
-    real_price_of_commidity: '',
-    method_of_pay: '',
-    time_of_deal: '2020/12/20',
-    time_of_pay: '2020/12/20',
-    time_of_delivery: '2020/12/20',
-    time_of_receive: '2020/12/20',
-    no_of_order: '',
+    commodity_picture: '',
+    commodity_name: '',
+    commodity_type: '',
+    price: '',
+    order_state: '',
+    order_time: '',
+    order_id: '',
+    payment_platform: '',
+    payment_time: '', 
     seller: '',
     buyer: ''
 }
 
 说明：
-      status_of_order表示订单状态，0和1表示退单和未退单
-      Image表示商品的图像;
-      name_of_commidity表示商品名称；
-      class_of_commidity表示商品类别；
-      price_of_commidity表示商品的标价；
-      real_price_of_commidity表示商品的实际付价；
-      method_of_pay表示支付方式；
-      time_of_deal表示下单时间；
-      time_of_pay表示付款时间；
-      time_of_delivery表示发货时间；
-      time_of_receive表示收货时间
+      order_state表示订单状态;
+      commodity_picture表示商品的图像;
+      commodity_name表示商品名称；
+      commodity_type表示商品类别；
+      price表示商品的标价；
+      payment_platform表示支付方式；
+      order_time表示下单时间；
+      payment_time表示付款时间；
 
 
-3.订单评价（直接作为评价交易对象，假设是卖家的界面，那就把涉及买家的部分屏蔽掉）
-前端=>后端（没有特殊说明即为默认值）
+3.订单评价   (以下请求,即为业务顺序步骤)
+前端=>后端（让后端知道哪个用户评价哪个订单）
 {
-    review: '',
-    description: 5,
-    speed: 5,
-    attitude: 5,
-    fileList: []
+    user_id: '',
+    order_id: ''
 }
 
-后端=>前端（没有特殊说明即为默认值）
+后端=>前端
 {
-    status_of_order表示订单状态，0和1表示退单和未退单
-    status_of_order: '',
-    Image: '',
-    name_of_commidity: '',
-    class_of_commidity: '',
-    price_of_commidity: '',
-    real_price_of_commidity: '',
-    method_of_pay: '',
+    commidity_picture: '',
+    commidity_name: '',
+    commidity_amount: '',
+    commidity_type: '',
+    price: '',
     seller: '',
-    buyer: '',
-    user_name: '',
-    no_of_order: ''
+    order_id: '',
+    order_time: '',
+    payment_platform: '',
+    payment_time: ''
 }
 
-说明：
-    Image：商品图像；
-    user_name: '用户名称',
-    name_of_commidity表示商品名称；
-    class_of_commidity表示商品类别；
-    price_of_commidity表示商品的标价；
-    real_price_of_commidity表示商品的实际付价；
-    method_of_pay表示支付方式；
-    seller表示卖家；
-    review表示用户输入的评论；
-    description表示用户对于“描述与事实相符”的评价，为数字0-5；
-    speed表示用户对“发货速度”的评价，为数字0-5；
-    attitude表示用户对“卖家态度”的评价，为数字0-5；
-    filelist为用户上传的一组图片，作为评价的凭证；
+前端=>后端
+{
+    user_id: '',
+    order_id: '',
+    commidity_quality: '',
+    deal_speed: '',
+    seller_attitude: '',
+    comment: '',
+    evidence_picture: ''(用户作为凭证的图片，可能是一组，待定)
 
+}
 
 4.生成订单
 前端=>后端（没有特殊说明即为默认值）  

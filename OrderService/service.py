@@ -18,13 +18,17 @@ class OrderService():
     @staticmethod
     def insertOrder(validated_data):
         orderdata = validated_data['commodity','seller','buyer','amount']
-        Order.objects.create(orderdata)
+        neworder = Order.objects.create(orderdata)
+        commodity_id = neworder.commodity
+        Commodity.objects.update(commodity_id,{'state':'已预定'})
 
-    @staticmethod
-    def payOrder(order_id,validated_data):
+    @staticmethod 
+    def payOrder(order_id):
         OrderService.pay(order_id)
         Order.objects.update(order_id,{'order_state':"已付款"})
-        OrderService.insertPaymentRecord(validated_data)
+        paidorder = Order.objects.get(order_id=order_id)
+        commodity_id = paidorder.commodity
+        Commodity.objects.update(commodity_id,{'state':'已售出'})
 
     @staticmethod
     def insertPaymentRecord(validated_data):
@@ -44,3 +48,7 @@ class OrderService():
     def insertBuyerReview(validated_data):
         buyerreviewdata = validated_data['order','score','comment']
         BuyerReview.objects.create(buyerreviewdata)
+
+    @staticmethod
+    def updateOrderState(order_id):
+        Order.objects.update(order_id,{'order_state':"已收货"})
