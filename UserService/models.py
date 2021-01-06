@@ -52,7 +52,7 @@ class User(models.Model):
     password = models.CharField(max_length=20)
     avatar  = models.ImageField()
     real_name = models.CharField(max_length=30)
-    sex = models.CharField(max_length=6,choices=SEX_CHOICES)
+    sex = models.CharField(max_length=6,choices=SEX_CHOICES,default='MALE')
     mobile = models.CharField(max_length=11)
     email = models.EmailField()
     account_state = models.CharField(choices=ACCOUNT_STATE_CHOICES,max_length=20)

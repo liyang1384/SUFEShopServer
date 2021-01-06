@@ -8,6 +8,7 @@ from utils import delete_null
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
+from utils import delete_null
 # Create your views here.
 # class UserViewSet (ModelViewSet):
 class UserList(APIView):
@@ -48,14 +49,16 @@ class UserDetail(APIView):
     def post(self,request):
         serializer=UserSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        UserService.insertUserInfo(validated_data=serializer.data)
+        validated_data = delete_null(serializer.data)
+        UserService.insertUserInfo(validated_data=validated_data)
         return Response(serializer.data)
     #修改一条数据
     @csrf_exempt
     def put(self,request):
         serializer=UserSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        UserService.updateUserDetail(serializer.data.get('user_id'),serializer.data)
+        validated_data = delete_null(serializer.data)
+        UserService.updateUserDetail(serializer.data.get('user_id'),validated_data)
         return Response(serializer.data)
 
 class Login(APIView):
