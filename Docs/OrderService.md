@@ -36,73 +36,64 @@
 2.订单信息查询
 后端=>前端（没有特殊说明即为默认值）
 {
-    status_of_order: '',
-    Image: '',
-    name_of_commidity: '',
-    class_of_commidity: '',
-    price_of_commidity: '',
-    real_price_of_commidity: '',
-    method_of_pay: '',
-    time_of_deal: '2020/12/20',
-    time_of_pay: '2020/12/20',
-    time_of_delivery: '2020/12/20',
-    time_of_receive: '2020/12/20',
-    no_of_order: '',
+    order_state: '',
+    commodity_picture: '',
+    commodity_name: '',
+    commodity_type: '',
+    price: '',
+    payment_platform: '',
+    order_time: '2020/12/20',
+    payment_time: '2020/12/20', 
+    order_id: '',
     seller: '',
     buyer: ''
 }
 
 说明：
-      status_of_order表示订单状态，0和1表示退单和未退单
-      Image表示商品的图像;
-      name_of_commidity表示商品名称；
-      class_of_commidity表示商品类别；
-      price_of_commidity表示商品的标价；
-      real_price_of_commidity表示商品的实际付价；
-      method_of_pay表示支付方式；
-      time_of_deal表示下单时间；
-      time_of_pay表示付款时间；
-      time_of_delivery表示发货时间；
-      time_of_receive表示收货时间
+      order_state表示订单状态;
+      commodity_picture表示商品的图像;
+      commodity_name表示商品名称；
+      commodity_type表示商品类别；
+      price表示商品的标价；
+      payment_platform表示支付方式；
+      order_time表示下单时间；
+      payment_time表示付款时间；
 
 
-3.订单评价
+3.评价卖家
 前端=>后端（没有特殊说明即为默认值）
 {
-    review: '',
-    description: 5,
-    speed: 5,
-    attitude: 5,
-    fileList: []
+    comment: '',
+    commodity_quality: 5,
+    deal_speed: 5,
+    seller_attitude: 5,
 }
 
 后端=>前端（没有特殊说明即为默认值）
 {
-    status_of_order表示订单状态，0和1表示退单和未退单
-    status_of_order: '',
-    Image: '',
-    name_of_commidity: '',
-    class_of_commidity: '',
-    price_of_commidity: '',
-    real_price_of_commidity: '',
-    method_of_pay: '',
+    order_state表示订单状态
+    order_state: '',
+    commodity_picture: '',
+    commodity_name: '',
+    commodity_type: '',
+    price: '',
+    real_price: '',
+    payment_platform: '',
     seller: '',
-    no_of_order: ''
+    order_id: ''
 }
 
 说明：
-    Image：商品图像；
-    name_of_commidity表示商品名称；
-    class_of_commidity表示商品类别；
-    price_of_commidity表示商品的标价；
-    real_price_of_commidity表示商品的实际付价；
-    method_of_pay表示支付方式；
+    commodity_picture：商品图像；
+    commodity_name表示商品名称；
+    commodity_type表示商品类别；
+    price表示商品的标价；
+    payment_platform表示支付方式；
     seller表示卖家；
-    review表示用户输入的评论；
-    description表示用户对于“描述与事实相符”的评价，为数字0-5；
-    speed表示用户对“发货速度”的评价，为数字0-5；
-    attitude表示用户对“卖家态度”的评价，为数字0-5；
-    filelist为用户上传的一组图片，作为评价的凭证；
+    comment表示用户输入的文字评论；
+    commodity_quality表示用户对于“商品质量”的评价，为数字0-5；
+    deal_speed表示用户对“交易速度”的评价，为数字0-5；
+    seller_attitude表示用户对“卖家态度”的评价，为数字0-5；
 
 
 4.生成订单
