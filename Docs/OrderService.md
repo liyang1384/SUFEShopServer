@@ -66,7 +66,7 @@
       time_of_receive表示收货时间
 
 
-3.订单评价
+3.订单评价（直接作为评价交易对象，假设是卖家的界面，那就把涉及买家的部分屏蔽掉）
 前端=>后端（没有特殊说明即为默认值）
 {
     review: '',
@@ -87,6 +87,7 @@
     real_price_of_commidity: '',
     method_of_pay: '',
     seller: '',
+    buyer: '',
     no_of_order: ''
 }
 
