@@ -9,10 +9,10 @@ class CommodityService():
     @staticmethod
     def getCommodityDetail(commodity_id):
         return Commodity.objects.get(pk=commodity_id)
-    @staticmethod
-    def listUnauditedCommodities():
-        unauditedcommodities = CommodityApplication.objects.filter(application_state ='TO_BE_REVIEWED').values('Commodity')
-        return Commodity.objects.filter(commodity_id__in = unauditedcommodities,if_delete=False)
+    # @staticmethod
+    # def listUnauditedCommodities():
+    #     unauditedcommodities = CommodityApplication.objects.filter(application_state ='TO_BE_REVIEWED',if_delete=False).values('Commodity')
+    #     return Commodity.objects.filter(commodity_id__in = unauditedcommodities,if_delete=False)
     @staticmethod
     def processUnauditedCommodity(application_id,validated_data):
         return CommodityApplication.objects.update(application_id,validated_data)

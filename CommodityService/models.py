@@ -11,6 +11,7 @@ class CommodityManager(models.Manager):
         instance.commodity_picture = validated_data.get('commodity_picture',instance.commodity_picture)
         instance.price =validated_data.get('price',instance.price)
         instance.detail = validated_data.get('detail',instance.detail)
+        instance.state = validated_data.get('state',instance.state)
         instance.if_delete = validated_data.get('if_delete',instance.if_delete)
         instance.save()
         return instance
@@ -72,6 +73,7 @@ class CommodityApplication(models.Model):
     auditor = models.ForeignKey("UserService.User",related_name='auditor',to_field='user_id',on_delete=models.CASCADE,blank=True)
     audit_time = models.DateTimeField(auto_now=True, auto_now_add=False)
     if_delete = models.BooleanField(default=False)
+    # commodity = models.OneToOneField("Commodity")
     objects = CommodityApplicationManager()
 
 #浏览记录
