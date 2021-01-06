@@ -24,7 +24,7 @@ class UserSerializer(serializers.Serializer):
     user_id = serializers.IntegerField(label='用户ID',allow_null=True,required=False)
     user_name = serializers.CharField(max_length=30,label='用户名',allow_null=True,required=False)
     password = serializers.CharField(max_length=20,label='密码',allow_null=True,required=False)
-    nickname = serializers.CharField(max_length=30,label='用户昵称',allow_null=True,required=False)
+    nick_name = serializers.CharField(max_length=30,label='用户昵称',allow_null=True,required=False)
     avatar = serializers.ImageField(label='头像',allow_null=True,required=False)
     real_name = serializers.CharField(max_length=30,label='真实姓名',allow_null=True,required=False)
     sex = serializers.ChoiceField(choices=SEX_CHOICES,label='性别',allow_null=True,required=False)

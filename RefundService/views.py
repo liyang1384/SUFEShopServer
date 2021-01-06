@@ -4,9 +4,11 @@ from rest_framework.views import APIView
 from django.http import JsonResponse
 from .service import RefundApplicationService
 from utils import delete_null
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 # Create your views here.
 
 class RefundDetail(APIView):
+    authentication_classes = [SessionAuthentication, BasicAuthentication]
     def get(self,request):
         serializer = RefundApplicationSerializer(data=request.query_params)
         serializer.is_valid(raise_exception=True)

@@ -5,8 +5,10 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from .service import CommodityService
 from utils import delete_null
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 # CommodityItem?
 class CommodityDetail(APIView):
+    authentication_classes = [SessionAuthentication, BasicAuthentication]
     # 查询一件商品
     def get(self, request):
         serializer = CommoditySerializer(data=request.query_params)
@@ -36,6 +38,7 @@ class CommodityDetail(APIView):
         return Response({'msg':'删除成功'})        
 
 class MyCommodityList(APIView):
+    authentication_classes = [SessionAuthentication, BasicAuthentication]
     def get(self, request):
         serializer = CommoditySerializer(data=request.query_params)
         serializer.is_valid(raise_exception=True)
@@ -45,6 +48,7 @@ class MyCommodityList(APIView):
     # listcommodities()
 
 class CommodityList(APIView):
+    authentication_classes = [SessionAuthentication, BasicAuthentication]
     def get(self, request):
         qurey_params = request.query_params.copy()
         min_price = qurey_params.get('min_price')
@@ -62,6 +66,7 @@ class CommodityList(APIView):
         # return Response(query_criteria)
 
 class AuditCommodityList(APIView):
+    authentication_classes = [SessionAuthentication, BasicAuthentication]
     def get(self, request):
         # serializer = CommoditySerializer(data=request.query_params)
         # serializer.is_valid(raise_exception=True)
@@ -98,6 +103,7 @@ class AuditCommodityList(APIView):
         return Response(serializer.data)
 
 class BrowseHistoryList(APIView):
+    authentication_classes = [SessionAuthentication, BasicAuthentication]
     def get(self, request):
         serializer = CommoditySerializer(data=request.query_params)
         serializer.is_valid(raise_exception=True)
