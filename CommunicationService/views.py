@@ -18,7 +18,6 @@ class MessageDetail(APIView):
         serializer.is_valid(raise_exception=True)
         instance = CommunicationService.getMessage(receive_user=serializer.data.get('receive_user'))
         serializer = MessageSerializer(instance)
-
         return Response(serializer.data)
 
     def post(self, request):
