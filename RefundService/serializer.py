@@ -8,7 +8,7 @@ class RefundApplicationSerializer(serializers.Serializer):
         ('APPROVED','同意退款'),
         ('REJECTED','拒绝退款'),
     )
-    refund_id = serializers.IntegerField(label='退款申请ID',allow_null=True,read_only='True',required=False)
+    refund_id = serializers.IntegerField(label='退款申请ID',allow_null=True,required=False)
     refund_state = serializers.ChoiceField(choices=REFUND_STATE_CHOICES,label='退款状态',allow_null=True,required=False)
     refund_reason = serializers.CharField(label='退款理由',allow_null=True,required=False)
     refund_time = serializers.DateTimeField(label='退款时间',allow_null=True,required=False)

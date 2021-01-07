@@ -12,18 +12,21 @@ class RefundDetail(APIView):
     def get(self,request):
         serializer = RefundApplicationSerializer(data=request.query_params)
         serializer.is_valid(raise_exception=True)
-        refundapplication = RefundApplicationService.getRefundDetail(pk=serializer.data.refund_id)
-        serializer = RefundApplicationSerializer(refundapplication)
+        # refundapplication = RefundApplicationService.getRefundDetail(pk=serializer.data.get('refund_id'))
+        # serializer = RefundApplicationSerializer(refundapplication)
+        # return Response(serializer.data)
         return Response(serializer.data)
     
     def patch(self,request):
         serializer=RefundApplicationSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        RefundApplicationService.processRefund(serializer.data.refund_id,serializer.data)
+        validate_data = delete_null(serializer.data)
+        RefundApplicationService.processRefund(serializer.data.get('refund_id'),validate_data)
         return Response(serializer.data)
 
     def post(self,request):
         serializer = RefundApplicationSerializer(request.data)
         serializer.is_valid(raise_exception=True)
-        RefundApplicationService.insertRefundDetail(serializer.data)
+        validate_data = delete_null(serializer.data)
+        RefundApplicationService.insertRefundDetail(validate_data)
         return Response(serializer.data)
